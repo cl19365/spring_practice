@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="org.javaboy.jdbc"/>
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/jdbctest"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123"/>
+    </bean>
+
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--在Java中添加事务-->
+    <tx:annotation-driven/>
+    <!--xml文件中添加事务的步骤-->
+    <!--1、加入事务管理器-->
+        <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+            <property name="dataSource" ref="dataSource"/>
+        </bean>
+        <!--2、配置事务要处理的方法-->
+<!--        <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--            <tx:attributes>-->
+<!--                <tx:method name="update*"/>-->
+<!--                <tx:method name="add*"/>-->
+<!--                <tx:method name="insert*"/>-->
+<!--                <tx:method name="delete*"/>-->
+<!--            </tx:attributes>-->
+<!--        </tx:advice>-->
+        <!--3、配置aop-->
+<!--        <aop:config>-->
+<!--            <aop:pointcut id="pc1" expression="execution(* org.javaboy.jdbc.AccountService.*(..))"/>-->
+<!--            <aop:advisor advice-ref="txAdvice" pointcut-ref="pc1"/>-->
+<!--        </aop:config>-->
+</beans>

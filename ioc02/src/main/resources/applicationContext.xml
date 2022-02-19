@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.javaboy.ioc.DataSource" id="ds" scope="prototype">
+        <property name="url" value="jdbc:mysql///vhr"/>
+        <property name="username" value="111"/>
+        <property name="password" value="111"/>
+    </bean>
+
+<!--    <beans profile="dev">-->
+<!--        <bean class="org.javaboy.ioc.DataSource" id="devDs" scope="prototype">-->
+<!--            <property name="url" value="jdbc:mysql///vhr"/>-->
+<!--            <property name="username" value="root"/>-->
+<!--            <property name="password" value="123"/>-->
+<!--        </bean>-->
+<!--    </beans>-->
+<!--    <beans profile="prod">-->
+<!--        <bean class="org.javaboy.ioc.DataSource" id="prodDs" scope="prototype">&lt;!&ndash;加入scope="prototype"之后每次获取的将不再是同一个 不再是单例&ndash;&gt;-->
+<!--            <property name="url" value="jdbc:mtysql://192.168.0.0:3306/vhr"/>-->
+<!--            <property name="username" value="rood"/>-->
+<!--            <property name="password" value="456"/>-->
+<!--        </bean>-->
+<!--    </beans>-->
+</beans>
